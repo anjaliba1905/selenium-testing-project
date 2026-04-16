@@ -20,9 +20,6 @@ jobs:
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
 
-      - name: Install ChromeDriver
-        uses: browser-actions/setup-chromedriver@v1
-
       - name: Compile Code
         run: javac -cp "libs/*" TestScript.java
 
