@@ -11,7 +11,7 @@ import java.time.Duration;
 
 public class TestScripts {
 
-    //  Common method to create driver 
+    // Common method to create driver 
     public WebDriver createDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
@@ -20,7 +20,7 @@ public class TestScripts {
 
         return new ChromeDriver(options);
     }
-    //  Test 1
+    // Test 1
     @Test
     public void testWebPage() {
 
@@ -38,7 +38,8 @@ public class TestScripts {
 
         driver.quit();
     }
-    //  Test 2
+
+    // Test 2
     @Test
     public void testTitleEquals() {
 
@@ -71,5 +72,18 @@ public class TestScripts {
         System.out.println("Status Code: " + code);
 
         Assert.assertEquals(code, 200);
+    }
+    // 🔥 ADD 
+    public static void main(String[] args) {
+        TestScripts obj = new TestScripts();
+
+        try {
+            obj.testWebPage();
+            obj.testTitleEquals();
+            obj.testStatusCode();
+            System.out.println("All tests executed successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
