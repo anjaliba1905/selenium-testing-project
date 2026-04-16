@@ -26,5 +26,5 @@ jobs:
           sudo apt-get install -y xvfb
           Xvfb :99 &
           export DISPLAY=:99
-          javac -cp "libs/*" miniproject/TestScripts.java
-          java -cp ".:libs/*" miniproject.TestScripts
+          javac -cp "libs/*" src/miniproject/TestScripts.java
+          java -cp ".:libs/*:src" miniproject.TestScripts
