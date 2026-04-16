@@ -5,7 +5,7 @@
     <classes>
       <class name="miniproject.TestScripts">
         <methods>
-          <include name="testTitleEquals"/>
+          <include name="testWebPage"/>
         </methods>
       </class> <!-- miniproject.TestScripts -->
     </classes>

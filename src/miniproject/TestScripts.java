@@ -2,6 +2,7 @@ package miniproject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,55 +11,58 @@ import java.time.Duration;
 
 public class TestScripts {
 
-    // ✅ Test 1 (Already working)
-	@Test
-	public void testWebPage() {
+    //  Common method to create driver 
+    public WebDriver createDriver() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
 
-	    WebDriver driver = new ChromeDriver();
+        return new ChromeDriver(options);
+    }
+    //  Test 1
+    @Test
+    public void testWebPage() {
 
-	    driver.get("https://www.google.com");
+        WebDriver driver = createDriver();
 
-	    String title = driver.getTitle();
-	    System.out.println("Page Title: " + title);
+        driver.get("https://www.google.com");
 
-	    Assert.assertTrue(title.contains("Google"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.titleContains("Google"));
 
-	    // 👇 Add this
-	    try {
-	        Thread.sleep(3000);
-	    } catch (InterruptedException e) {
-	        e.printStackTrace();
-	    }
+        String title = driver.getTitle();
+        System.out.println("Page Title: " + title);
 
-	    driver.quit();
-	}
+        Assert.assertTrue(title.contains("Google"));
 
-    // ✅ Test 2 (Add here)
-	@Test
-	public void testTitleEquals() {
+        driver.quit();
+    }
+    //  Test 2
+    @Test
+    public void testTitleEquals() {
 
-	    WebDriver driver = new ChromeDriver();
+        WebDriver driver = createDriver();
 
-	    driver.get("https://www.google.com");
+        driver.get("https://www.google.com");
 
-	    // 👇 WAIT UNTIL TITLE LOADS
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-	    wait.until(ExpectedConditions.titleContains("Google"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.titleContains("Google"));
 
-	    String title = driver.getTitle();
-	    System.out.println("Title: " + title);
+        String title = driver.getTitle();
+        System.out.println("Title: " + title);
 
-	    Assert.assertEquals(title, "Google");
+        Assert.assertEquals(title, "Google");
 
-	    driver.quit();
-	}
-    // ✅ Test 3 (Add here)
+        driver.quit();
+    }
+    // Test 3 (API Test)
     @Test
     public void testStatusCode() throws Exception {
 
         java.net.URL url = new java.net.URL("https://www.google.com");
         java.net.HttpURLConnection connection =
-            (java.net.HttpURLConnection) url.openConnection();
+                (java.net.HttpURLConnection) url.openConnection();
 
         connection.setRequestMethod("GET");
         connection.connect();

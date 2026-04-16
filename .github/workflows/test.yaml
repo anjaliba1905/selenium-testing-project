@@ -20,8 +20,11 @@ jobs:
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
 
-      - name: Compile Code
-        run: javac -cp "libs/*" TestScripts.java
-
       - name: Run Tests
-        run: java -cp ".:libs/*" TestScripts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          Xvfb :99 &
+          export DISPLAY=:99
+          javac -cp "libs/*" TestScripts.java
+          java -cp ".:libs/*" miniproject.TestScripts
