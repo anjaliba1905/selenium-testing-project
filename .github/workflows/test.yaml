@@ -21,7 +21,7 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Compile Code
-        run: javac -cp "libs/*" TestScript.java
+        run: javac -cp "libs/*" TestScripts.java
 
       - name: Run Tests
-        run: java -cp ".:libs/*" TestScript
+        run: java -cp ".:libs/*" TestScripts
